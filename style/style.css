@@ -1,0 +1,141 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    min-height: 100vh;
+    background-image: linear-gradient(120deg, rgb(231, 118, 66), rgb(247, 191, 87));
+}
+.todo-header{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0 80px 0;
+}
+.todo-header h1{
+    color: white;
+    font-size: 3rem;
+}
+.fa-check, .fa-trash, .fa-edit, .fa-save, .fa-tasks, .fa-plus-circle{
+    pointer-events: none;
+}
+.todo-input, .todo-button{
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    background: white;
+}
+form{
+    width: 40%;
+}
+form input{
+    width: 90%;
+}
+form button {
+    color: #ff6f47;
+    background: #f7fffe;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+form button:hover {
+    background: #ff6f47;
+    color: white;
+}
+
+.todo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-list {
+    min-width: 50%;
+    width: 50%;
+    list-style: none;
+}
+.subTodo-list{
+    list-style: none;
+}
+
+.todo {
+    margin-top: 20px;
+    padding: 0;
+    /* background: rgb(230, 150, 3); */
+    font-size: 1.5rem;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 1s ease;
+}
+.todoMain {
+    background: white;
+    font-size: 1.5rem;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 1s ease;
+    width: 100%;
+}
+.sub{
+    margin-left: 95px;
+}
+.subTodo-container{
+    margin-top: 10px;
+    
+}
+.filter-todo {
+    padding: 1rem;
+}
+.todo li {
+    flex: 1;
+}
+.trash-btn,
+.complete-btn,
+.edit-btn,
+.sub-btn,
+.addNewTask-btn
+{
+    background: #ff6f47;
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.complete-btn {
+  background: rgb(11, 212, 162);    
+}
+.edit-btn{
+    background: #f1e53a;
+}
+.sub-btn{
+    background: rgb(12, 152, 187);
+}
+.addNewTask-btn{
+    background: rgb(12, 152, 187);
+}
+.todo-item {
+  padding: 0rem 0.5rem;
+}
+.text{
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    border: none;
+    background: white;
+    width: 100%;
+    color: rgb(248, 92, 2);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.text:not(:read-only){
+    color: rgb(0, 0, 0);
+}
+
+.completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
