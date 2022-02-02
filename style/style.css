@@ -81,11 +81,10 @@ form button:hover {
     width: 100%;
 }
 .sub{
-    margin-left: 70px;
+    margin-left: 95px;
 }
 .subTodo-container{
     margin-top: 10px;
-    
 }
 .filter-todo {
     padding: 0.8rem;

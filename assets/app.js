@@ -22,7 +22,7 @@ filterSelector.addEventListener("click",filterTodo);
 function addTodo(event){
     event.preventDefault();
     //if todo is empty
-    if(todoInput.value===""&&todoDate.value===""){
+    if(todoInput.value===""){
         alert("Add Task and Date");
         return;
     }
