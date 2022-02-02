@@ -28,7 +28,8 @@ body{
     background: white;
 }
 form{
-    width: 50%;
+    width: 60%;
+    display: flex;
 }
 /* form input{
     width: 100%;
@@ -80,11 +81,10 @@ form button:hover {
     transition: all 1s ease;
     width: 100%;
 }
-.sub{
-    margin-left: 95px;
-}
+
 .subTodo-container{
     margin-top: 10px;
+    margin-left: auto;
 }
 .filter-todo {
     padding: 0.8rem;
@@ -141,9 +141,9 @@ form button:hover {
     width: auto;
     padding:14px 5px 7px 5px;
 }
-#inputid{
-    width: 70%;
-}
+/* #inputid{
+    width: 60%;
+} */
 .todoDate{
     width: auto;
     margin-right: -80px;
