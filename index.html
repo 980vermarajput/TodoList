@@ -12,11 +12,21 @@
         <div class="todo-header">
             <h1>TODO's list</h1>
             <form>
-                <input class="todo-input" type="text" placeholder="Add Task">
+                <input class="todo-input text" id="inputid" type="text" placeholder="Add Task">
+                <input type="date" class="todo-input date" id="date" >
                 <button class="todo-button" title="Add Task" type="submit">
                     <i class="fas fa-plus"></i>
                 </button>
             </form>
+            <div class="select">
+                <select name="todos" class="filter-todo">
+                    <option value="all">All</option>
+                    <option value="today">today</option>
+                    <option value="upcoming">upcoming</option>
+                    <option value="completed">completed</option>
+                    <option value="uncompleted">uncompleted</option>
+                </select>
+            </div>
         </div>
         <div class="todo-container">
             <ul class="todo-list"></ul>

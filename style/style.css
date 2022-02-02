@@ -22,17 +22,17 @@ body{
     pointer-events: none;
 }
 .todo-input, .todo-button{
-    padding: 0.5rem;
+    padding: 16px 15px 10px 15px;
     font-size: 1rem;
     border: none;
     background: white;
 }
 form{
-    width: 40%;
+    width: 50%;
 }
-form input{
-    width: 90%;
-}
+/* form input{
+    width: 100%;
+} */
 form button {
     color: #ff6f47;
     background: #f7fffe;
@@ -88,7 +88,7 @@ form button:hover {
     
 }
 .filter-todo {
-    padding: 1rem;
+    padding: 0.8rem;
 }
 .todo li {
     flex: 1;
@@ -107,7 +107,7 @@ form button:hover {
     font-size: 1rem;
 }
 .complete-btn {
-  background: rgb(11, 212, 162);    
+    background: rgb(11, 212, 162);    
 }
 .edit-btn{
     background: #f1e53a;
@@ -138,4 +138,49 @@ form button:hover {
     text-decoration: line-through;
     opacity: 0.5;
 }
-
+ .date{
+    width: auto;
+    padding:14px 5px 7px 5px;
+}
+#inputid{
+    width: 70%;
+}
+.todoDate{
+    width: auto;
+    margin-right: -80px;
+}
+/*CUSTOM SELECTOR */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background-image: none;
+  }
+  
+  /* Custom Select */
+  .select {
+    margin: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+  select {
+    color: #ff6f47;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+    width: 12rem;
+  }
+  /* Arrow */
+  .select::after {
+    content: "\25BC";
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    background: #ff6f47;
+    cursor: pointer;
+    pointer-events: none;
+  }

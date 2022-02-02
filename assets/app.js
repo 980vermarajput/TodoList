@@ -5,14 +5,16 @@ let subTasks=[];       //{subTask:taskInput.value,id:todoSubDiv.id,parentId:pare
 // SELECTORS
 
 const todoInput = document.querySelector('.todo-input');
+const todoDate = document.querySelector('#date')
 const todoButton = document.querySelector('.todo-button');
 const todoList = document.querySelector('.todo-list');
+const filterSelector = document.querySelector('.filter-todo');
 
 //  EVENT LISTENERS 
-
 document.addEventListener('DOMContentLoaded',getTodos);
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", addSubTask);
+filterSelector.addEventListener("click",filterTodo);
 
 
 // FUNCTIONS
@@ -20,8 +22,8 @@ todoList.addEventListener("click", addSubTask);
 function addTodo(event){
     event.preventDefault();
     //if todo is empty
-    if(todoInput.value===""){
-        alert("Add Task");
+    if(todoInput.value===""&&todoDate.value===""){
+        alert("Add Task and Date");
         return;
     }
     //creating div 
@@ -29,7 +31,7 @@ function addTodo(event){
     todoDiv.classList.add("todo");
     todoDiv.id=Math.random();
     // adding task to array
-    tasks.push({task:todoInput.value,id:todoDiv.id,check:false})
+    tasks.push({task:todoInput.value,id:todoDiv.id,check:false,date:todoDate.value})
     console.log(tasks);
     //Title Todo
     const todoMainDiv = document.createElement("div");
@@ -46,6 +48,14 @@ function addTodo(event){
     taskInput.setAttribute("readonly","readonly");
     taskInput.value=todoInput.value;
     newTodo.appendChild(taskInput);
+    //date
+    const taskDate = document.createElement("input");
+    taskDate.classList.add("text");
+    taskDate.classList.add("todoDate");
+    taskDate.type="date";
+    taskDate.setAttribute("readonly","readonly");
+    taskDate.value=todoDate.value;
+    todoMainDiv.appendChild(taskDate);
     // edit button
     const editButton = document.createElement("button");
     editButton.classList.add("edit-btn");
@@ -57,17 +67,20 @@ function addTodo(event){
         if(editButton.innerHTML==='<i class="fas fa-edit"></i>'){
             editButton.innerHTML='<i class="fas fa-save"></i>';
             taskInput.removeAttribute("readonly");
+            taskDate.removeAttribute("readonly");
         }
         else{
             editButton.innerHTML=`<i class="fas fa-edit"></i>`;
             tasks.forEach((task)=>{
                 if(task.id===todoDiv.id){
                     task.task=taskInput.value;
+                    task.date=taskDate.value;
                     console.log(tasks);
                 }
             })
             saveLocalTodos();
             taskInput.setAttribute("readonly","readonly");
+            taskDate.setAttribute("readonly","readonly");
         }
     })
     // add subtask button
@@ -128,6 +141,7 @@ function addTodo(event){
     // append to main todo list
     todoList.appendChild(todoDiv);
     todoInput.value="";
+    todoDate.value="";
     saveLocalTodos();
 };
 
@@ -302,10 +316,10 @@ function getTodos(){
         const todoMainDiv = document.createElement("div");
         todoMainDiv.classList.add("todoMain");
         if(!todo.check){
-            todoMainDiv.classList.remove("completed");
+            todoDiv.classList.remove("completed");
         }
         else {
-                todoMainDiv.classList.add("completed");
+                todoDiv.classList.add("completed");
             }
         todoDiv.appendChild(todoMainDiv);
         //creating li
@@ -319,6 +333,14 @@ function getTodos(){
         taskInput.setAttribute("readonly","readonly");
         taskInput.value=todo.task;
         newTodo.appendChild(taskInput);
+        //date
+        const taskDate = document.createElement("input");
+        taskDate.classList.add("text");
+        taskDate.classList.add("todoDate");
+        taskDate.type="date";
+        taskDate.setAttribute("readonly","readonly");
+        taskDate.value=todo.date;
+        todoMainDiv.appendChild(taskDate);
         // edit button
         const editButton = document.createElement("button");
         editButton.classList.add("edit-btn");
@@ -330,17 +352,20 @@ function getTodos(){
             if(editButton.innerHTML==='<i class="fas fa-edit"></i>'){
                 editButton.innerHTML='<i class="fas fa-save"></i>';
                 taskInput.removeAttribute("readonly");
+                taskDate.removeAttribute("readonly");
             }
             else{
                 editButton.innerHTML=`<i class="fas fa-edit"></i>`;
                 tasks.forEach((task)=>{
                     if(task.id===todoDiv.id){
                         task.task=taskInput.value;
+                        task.date=taskDate.value;
                         console.log(tasks);
                     }
                 })
                 saveLocalTodos();
                 taskInput.setAttribute("readonly","readonly");
+                taskDate.setAttribute("readonly","readonly");
             }
         })
         // add subtask button
@@ -359,10 +384,10 @@ function getTodos(){
             tasks.forEach((task)=>{
                 if(task.id===todoDiv.id && task.check){
                     task.check=false;
-                    todoMainDiv.classList.remove("completed");
+                    todoDiv.classList.remove("completed");
                 }else if(task.id===todoDiv.id && !task.check){
                     task.check=true;
-                    todoMainDiv.classList.add("completed");
+                    todoDiv.classList.add("completed");
                 }
             })
             saveLocalTodos();
@@ -517,3 +542,53 @@ function getTodos(){
         ulSubtask.appendChild(todoSubDiv);
     })
 }
+
+function filterTodo(e) {
+    const todos = todoList.childNodes;
+    let today = new Date();
+    let dd = parseInt(String(today.getDate()).padStart(2, '0'));
+    let mm = parseInt(String(today.getMonth() + 1).padStart(2, '0')); //January is 0!
+    let yyyy = parseInt(today.getFullYear());
+    todos.forEach(function(todo) {
+        let taskDate = todo.firstChild.firstChild.nextSibling.value;
+        let year=parseInt(taskDate.slice(0,4));
+        let month=parseInt(taskDate.slice(5,7));
+        let date=parseInt(taskDate.slice(8,10));
+        console.log(year);
+        console.log(month);
+        console.log(date);
+        console.log(dd);
+        switch (e.target.value) {
+            case "all":
+            todo.style.display = "flex";
+            break;
+            case "completed":
+            if (todo.classList.contains("completed")) {
+                todo.style.display = "flex";
+            } else {
+                todo.style.display = "none";
+            }
+            break;
+            case "today":
+                if (yyyy===year && mm===month && dd===date ) {
+                todo.style.display = "flex";
+                } else {
+                todo.style.display = "none";
+                }
+                break;
+            case "upcoming":
+                if (yyyy===year && mm===month && date>dd &&date<dd+3) {
+                todo.style.display = "flex";
+                } else {
+                todo.style.display = "none";
+                }
+                break;
+            case "uncompleted":
+            if (!todo.classList.contains("completed")) {
+                todo.style.display = "flex";
+            } else {
+                todo.style.display = "none";
+            }
+      }
+    });
+  }
